@@ -2,41 +2,25 @@
 *
 
 sets
-i conjunto de pacientes /m1*m5/
+i conjunto de pacientes /m1*m2/
 j conjunto de procedimientos /n1*n6/
-h conjunto de horas/t1*t24/;
+h conjunto de horas/t1*t15/;
 
 */i es pacientes, j es procedimientos/
 parameter p(i,j) procedimientosA;
 p(i,j)=0;
-p('m1','n1')=1;
-p('m1','n2')=1;
-p('m1','n5')=1;
+p('m1','n4')=1;
 p('m1','n6')=1;
-p('m2','n1')=1;
-p('m2','n2')=1;
-p('m2','n3')=1;
-p('m2','n6')=1;
-p('m3','n2')=1;
-p('m3','n3')=1;
-p('m3','n4')=1;
-p('m3','n5')=1;
-p('m3','n6')=1;
-p('m4','n1')=1;
-p('m4','n4')=1;
-p('m5','n3')=1;
+p('m2','n4')=1;
 
 */i es pacientes/
 parameter g(i) gravedad;
 g(i)=999;
 g('m1')=15;
-g('m2')=15;
-g('m3')=15;
-g('m4')=10;
-g('m5')=8;
+g('m2')=8;
 
 */j es procedimiento/
-parameter d(j) gravedad;
+parameter d(j) duracion;
 d(j)=999;
 d('n1')=1;
 d('n2')=5;
@@ -48,39 +32,46 @@ d('n5')=3;
 Variables
 x(i,h)   si el paciente i esta esperando a que le realicen un procedimiento a la hora h
 y(i,h)   si el paciente i esta en el hospital a la hora h
-a(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
+w(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
 u(j,h)   si se esta realizando el procedimiento j a la hora h
-w(i,j)   cantidad de horas que ha estado el paciente i en el procedimiento  j
 z        funcion objetivo;
 
 Binary variable x;
 Binary variable y;
-Binary variable a;
+Binary variable w;
 Binary variable u;
 
 Equations
-funcionObjetivo     funcion objetivo.;
+funcionObjetivo     Funcion objetivo.
+R1(i)               El paciente iÅno puede estar en el hospital mas horas de lo que su gravedad lo permita.
+*R2(i)              El paciente i debe estar por lo menos el tiempo que el procedimiento j que requiere necesita.;
+R3(i,h)             El paciente iÅesta esperando o se le esta realizando un procedimiento a la hora h
+*R4(i,h)            El paciente i permanece horas consecutivas en el hospital desde el momento en el que llega
+*R5(i,j)            Un paciente iÅno le pueden empezar a realizar mas de una vez el procedimiento j. Esto es porque se asume que el procedimiento se tiene que hacer una unica vez.
+R6                  Solo se puede hacer un procedimiento j a la hora h.;
 
 
+funcionObjetivo(j)                ..  z =e= sum((i,h),y(i,h));
+R1(i)                             ..  g(i) =g= sum((h),y(i,h));
+*R2(i)                             ..  sum((h),y(i,h)) =g= sum((j),p(i,j)*d(j));
+R3(i,h)                           ..  y(i,h) =e= sum((j),w(i,h,j))+x(i,h);
+*R4(j)$(ord(j) =1)                 ..  2 =l= (sum((i),h(i,j)*x(i)))/5;/
+*R5(i,j)                           .. p(i,j)*d(j)=e= sum((h),w(i,h,j));
+R6(j,h)                           .. sum((i),w(i,h,j))=e= u(j,h);
 
-funcionObjetivo(j)$(ord(j) =4)    ..  z =e= sum((i),h(i,j)*x(i));
-R1                                ..  5 =e= sum((i),x(i));
-R2(k)$(ord(k) =3)                 ..  4 =l= sum((i),r(i,k)*x(i));
-R3(k)$(ord(k) =1)                 ..  2 =l= sum((i),r(i,k)*x(i));
-R4(k)$(ord(k) =2)                 ..  1 =l= sum((i),r(i,k)*x(i));
-R5(j)$(ord(j) =1)                 ..  2 =l= (sum((i),h(i,j)*x(i)))/5;
-R6(j)$(ord(j) =2)                 ..  2 =l= (sum((i),h(i,j)*x(i)))/5;
-R7(j)$(ord(j) =3)                 ..  2 =l= (sum((i),h(i,j)*x(i)))/5;
-R8                                ..  1 =e= x('m2')+x('m3');
 
 
 
 
 Model model1 /all/ ;
 option mip=CPLEX
-Solve model1 using mip maximizing z;
+Solve model1 using mip minimizing z;
 
-Display h;
-Display r;
+Display p;
+Display g;
+Display d;
 Display x.l;
+Display y.l;
+Display u.l;
+Display w.l;
 Display z.l;
