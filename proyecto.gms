@@ -2,83 +2,64 @@
 *
 
 sets
-i conjunto de pacientes /m1*m10/
-j conjunto de procedimientos /t1*t4/
-k conjunto de rol/r1*r3/;
+i conjunto de pacientes /m1*m5/
+j conjunto de procedimientos /n1*n6/
+h conjunto de horas/t1*t24/;
 
-*/i es jugadores, j es habilidades/
-parameter h(i,j) habilidades;
-h(i,j)=999;
-h('m1','t1')=3;
-h('m1','t2')=3;
-h('m1','t3')=1;
-h('m1','t4')=3;
-h('m2','t1')=2;
-h('m2','t2')=1;
-h('m2','t3')=3;
-h('m2','t4')=2;
-h('m3','t1')=2;
-h('m3','t2')=3;
-h('m3','t3')=2;
-h('m3','t4')=2;
-h('m4','t1')=1;
-h('m4','t2')=3;
-h('m4','t3')=3;
-h('m4','t4')=1;
-h('m5','t1')=3;
-h('m5','t2')=3;
-h('m5','t3')=3;
-h('m5','t4')=3;
-h('m6','t1')=3;
-h('m6','t2')=1;
-h('m6','t3')=2;
-h('m6','t4')=3;
-h('m7','t1')=3;
-h('m7','t2')=2;
-h('m7','t3')=2;
-h('m7','t4')=1;
+*/i es pacientes, j es procedimientos/
+parameter p(i,j) procedimientosA;
+p(i,j)=0;
+p('m1','n1')=1;
+p('m1','n2')=1;
+p('m1','n5')=1;
+p('m1','n6')=1;
+p('m2','n1')=1;
+p('m2','n2')=1;
+p('m2','n3')=1;
+p('m2','n6')=1;
+p('m3','n2')=1;
+p('m3','n3')=1;
+p('m3','n4')=1;
+p('m3','n5')=1;
+p('m3','n6')=1;
+p('m4','n1')=1;
+p('m4','n4')=1;
+p('m5','n3')=1;
 
-*/i es jugadores, k es el rol/
-parameter r(i,k) habilidades;
-r(i,k)=999;
-r('m1','r1')=1;
-r('m1','r2')=0;
-r('m1','r3')=0;
-r('m2','r1')=0;
-r('m2','r2')=1;
-r('m2','r3')=0;
-r('m3','r1')=1;
-r('m3','r2')=0;
-r('m3','r3')=1;
-r('m4','r1')=0;
-r('m4','r2')=1;
-r('m4','r3')=1;
-r('m5','r1')=1;
-r('m5','r2')=0;
-r('m5','r3')=1;
-r('m6','r1')=0;
-r('m6','r2')=1;
-r('m6','r3')=1;
-r('m7','r1')=1;
-r('m7','r2')=0;
-r('m7','r3')=1;
+*/i es pacientes/
+parameter g(i) gravedad;
+g(i)=999;
+g('m1')=15;
+g('m2')=15;
+g('m3')=15;
+g('m4')=10;
+g('m5')=8;
+
+*/j es procedimiento/
+parameter d(j) gravedad;
+d(j)=999;
+d('n1')=1;
+d('n2')=5;
+d('n3')=3;
+d('n4')=1;
+d('n5')=1;
+d('n5')=3;
 
 Variables
-x(i) indica si el jugador i va a jugar o no
-z      funcion objetivo;
+x(i,h)   si el paciente i esta esperando a que le realicen un procedimiento a la hora h
+y(i,h)   si el paciente i esta en el hospital a la hora h
+a(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
+u(j,h)   si se esta realizando el procedimiento j a la hora h
+w(i,j)   cantidad de horas que ha estado el paciente i en el procedimiento  j
+z        funcion objetivo;
 
 Binary variable x;
+Binary variable y;
+Binary variable a;
+Binary variable u;
 
 Equations
-funcionObjetivo(j) funcion objetivo.
-R1                 El equipo titular debe tener 5 jugadores.
-R2(k)              Por lo menos cuatro miembros deben ser capaces de jugar en la defensiva.
-R3(k)              Por lo menos dos jugadores deben jugar como atacantes.
-R4(k)              Al menos uno debe jugar en el centro.
-R5(j)              El nivel promedio de control del bal?n del equipo titular tiene que ser por lo menos de dos.
-R6(j)              El nivel promedio de disparo del equipo titular tiene que ser por lo menos de dos.
-R7(j)              El nivel promedio de rebotes del equipo titular tiene que ser por lo menos de dos.
-R8                 En el equipo titular debe estar el jugador dos o el jugador tres.;
+funcionObjetivo     funcion objetivo.;
 
 
 
