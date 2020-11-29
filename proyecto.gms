@@ -41,14 +41,14 @@ Binary variable x;
 Binary variable y;
 Binary variable w;
 Binary variable u;
-Binary variable v; 
+Binary variable v;
 
 Equations
 funcionObjetivo     Funcion objetivo.
 R1(i)               El paciente iÅno puede estar en el hospital mas horas de lo que su gravedad lo permita.
 R2(i)               El paciente i debe estar por lo menos el tiempo que el procedimiento j que requiere necesita.
 R3(i,h)             El paciente iÅesta esperando o se le esta realizando un procedimiento a la hora h
-*R4(i,h)             El paciente i permanece horas consecutivas en el hospital desde el momento en el que llega
+R4(i,h)             El paciente i permanece horas consecutivas en el hospital desde el momento en el que llega
 R5(h,i)             El paciente iÅno puede encontrarse realizando mas de un procedimiento jÅa la misma hora h.
 R6(i,j)             Un paciente iÅno le pueden empezar a realizar mas de una vez el procedimiento j. Esto es porque se asume que el procedimiento se tiene que hacer una unica vez.
 R7(j,h)             Solo se puede hacer un procedimiento j a la hora h.;
@@ -58,8 +58,7 @@ funcionObjetivo                      ..  z =e= sum((i,h),y(i,h));
 R1(i)                                ..  g(i) =g= sum((h),y(i,h));
 R2(i)                                ..  sum((h),y(i,h)) =g= sum((j),p(i,j));
 R3(i,h)                              ..  y(i,h) =e= sum((j),w(i,h,j))+x(i,h);
-*R4(i,h)$(ord(h)<>1 or ord(h)<>15)    ..  y(i,h-1)+y(i,h+1) =l= x(i,h)+1;
-*R4(i,h)$(ord(h)<>1 or ord(h)<>15)    ..  y(i,h-1)+y(i,h+1) =l= 2*x(i,h);
+R4(i,h)$(ord(h)<>1 or ord(h)<>15)    ..  y(i,h-1)+y(i,h+1) =l= x(i,h)+1;
 R5(h,i)                              ..  1 =g= sum((j),w(i,h,j));
 R6(i,j)                              ..  p(i,j)=e= sum((h),w(i,h,j));
 R7(j,h)                              ..  sum((i),w(i,h,j)) =e= u(j,h);
