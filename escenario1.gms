@@ -48,9 +48,11 @@ peso('t14')=14;
 peso('t15')=15;
 
 Variables
+x(i)   si el paciente i esta esperando a que le realicen un procedimiento a la hora h
 y(i,h)   si el paciente i esta en el hospital a la hora h
 w(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
 u(j,h)   si se esta realizando el procedimiento j a la hora h
+v(i)     se realizaron todos los procedimientos
 z        funcion objetivo;
 
 Binary variable y;
@@ -62,9 +64,12 @@ funcionObjetivo     Funcion objetivo.
 R1(i)               El paciente iÅno puede estar en el hospital mas horas de lo que su gravedad lo permita.
 R2(i)               El paciente i debe estar por lo menos el tiempo que el procedimiento j que requiere necesita.
 R3(i,h)             El paciente iÅesta esperando o se le esta realizando un procedimiento a la hora h
-R4(h,i)             El paciente iÅno puede encontrarse realizando mas de un procedimiento jÅa la misma hora h.
-R5(i,j)             Un paciente iÅno le pueden empezar a realizar mas de una vez el procedimiento j. Esto es porque se asume que el procedimiento se tiene que hacer una unica vez.
-R6(j,h)             Solo se puede hacer un procedimiento j a la hora h.
+*R4(i)               El paciente i permanece horas consecutivas en el hospital desde el momento en el que llega
+R5(h,i)             El paciente iÅno puede encontrarse realizando mas de un procedimiento jÅa la misma hora h.
+R6(i,j)             Un paciente iÅno le pueden empezar a realizar mas de una vez el procedimiento j. Esto es porque se asume que el procedimiento se tiene que hacer una unica vez.
+R7(j,h)             Solo se puede hacer un procedimiento j a la hora h.
+*R8(i)               hfjhf
+*R9(i)               hfjhf
 ;
 
 
@@ -72,9 +77,12 @@ funcionObjetivo                      ..  z =e= sum((i,h),y(i,h)*peso(h));
 R1(i)                                ..  g(i) =g= sum((h),y(i,h));
 R2(i)                                ..  sum((h),y(i,h)) =g= sum((j),p(i,j));
 R3(i,h)                              ..  y(i,h) =e= sum((j),w(i,h,j));
-R4(h,i)                              ..  1 =g= sum((j),w(i,h,j));
-R5(i,j)                              ..  p(i,j)=e= sum((h),w(i,h,j));
-R6(j,h)                              ..  sum((i),w(i,h,j)) =e= u(j,h);
+*R4(i)                                ..  sum((h)$(ord(h)<>1),y(i,h)-y(i,h-1))=e= v(i);
+R5(h,i)                              ..  1 =g= sum((j),w(i,h,j));
+R6(i,j)                              ..  p(i,j)=e= sum((h),w(i,h,j));
+R7(j,h)                              ..  sum((i),w(i,h,j)) =e= u(j,h);
+*R8(i)                                ..  v(i)=g=0;
+*R9(i)                                ..  sum((h)$(ord(h)<>1),y(i,h-1)-y(i,h))=e= x(i);
 
 
 
@@ -87,7 +95,9 @@ Solve model1 using mip minimizing z;
 
 Display p;
 Display g;
+*Display x.l;
 Display y.l;
 Display u.l;
 Display w.l;
+*Display v.l;
 Display z.l;
