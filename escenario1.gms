@@ -29,60 +29,40 @@ g('m3')=36;
 g('m4')=55;
 g('m5')=120;
 
-parameter peso(h) peso;
-peso(h)=999;
-peso('t1')=1;
-peso('t2')=2;
-peso('t3')=3;
-peso('t4')=4;
-peso('t5')=5;
-peso('t6')=6;
-peso('t7')=7;
-peso('t8')=8;
-peso('t9')=9;
-peso('t10')=10;
-peso('t11')=11;
-peso('t12')=12;
-peso('t13')=13;
-peso('t14')=14;
-peso('t15')=15;
+* Duración
+parameter d(j) duración;
+d(j) = 1;
+
+* Cantidad máxima de procedimientos en simultáneo
+parameter u(j) núm máximo de procedimientos j en J que se pueden realizar de manera simultánea en el hospital.;
+u(j)=2; 
 
 Variables
-x(i)   si el paciente i esta esperando a que le realicen un procedimiento a la hora h
 y(i,h)   si el paciente i esta en el hospital a la hora h
-w(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
-u(j,h)   si se esta realizando el procedimiento j a la hora h
-v(i)     se realizaron todos los procedimientos
-z        funcion objetivo;
+z(i,h,j) si el paciente i a la hora h le estan realizando el procedimiento j
+f        funcion objetivo;
 
 Binary variable y;
-Binary variable w;
-Binary variable u;
+Binary variable z;
 
 Equations
 funcionObjetivo     Funcion objetivo.
-R1(i)               El paciente i�no puede estar en el hospital mas horas de lo que su gravedad lo permita.
-R2(i)               El paciente i debe estar por lo menos el tiempo que el procedimiento j que requiere necesita.
-R3(i,h)             El paciente i�esta esperando o se le esta realizando un procedimiento a la hora h
-*R4(i)               El paciente i permanece horas consecutivas en el hospital desde el momento en el que llega
-R5(h,i)             El paciente i�no puede encontrarse realizando mas de un procedimiento j�a la misma hora h.
-R6(i,j)             Un paciente i�no le pueden empezar a realizar mas de una vez el procedimiento j. Esto es porque se asume que el procedimiento se tiene que hacer una unica vez.
-R7(j,h)             Solo se puede hacer un procedimiento j a la hora h.
-*R8(i)               hfjhf
-*R9(i)               hfjhf
+R1(i)               El paciente i∈I no puede estar en el hospital más horas de lo que su gravedad lo permita.
+R2(i)               El paciente i∈I debe estar por lo menos el tiempo que el procedimiento j∈J que requiere necesita.
+R3(i,h)             El paciente i∈I no le pueden realizar un procedimiento j∈J a la hora h∈H si no se encuentra en el hospital.
+R4(h,i)             El paciente i∈I no puede encontrarse realizando más de un procedimiento j∈J a la misma hora h∈H.
+R5(i,j)             Cada paciente i∈I debe durar en el procedimiento j∈J la duración correspondiente al procedimiento.
+R6(j,h)             Solo se puede hacer un procedimiento j∈J a la hora h∈H.
 ;
 
 
-funcionObjetivo                      ..  z =e= sum((i,h),y(i,h)*peso(h));
-R1(i)                                ..  g(i) =g= sum((h),y(i,h));
-R2(i)                                ..  sum((h),y(i,h)) =g= sum((j),p(i,j));
-R3(i,h)                              ..  y(i,h) =e= sum((j),w(i,h,j));
-*R4(i)                                ..  sum((h)$(ord(h)<>1),y(i,h)-y(i,h-1))=e= v(i);
-R5(h,i)                              ..  1 =g= sum((j),w(i,h,j));
-R6(i,j)                              ..  p(i,j)=e= sum((h),w(i,h,j));
-R7(j,h)                              ..  sum((i),w(i,h,j)) =e= u(j,h);
-*R8(i)                                ..  v(i)=g=0;
-*R9(i)                                ..  sum((h)$(ord(h)<>1),y(i,h-1)-y(i,h))=e= x(i);
+funcionObjetivo                      ..  f =e= sum((i,h),y(i,h));
+R1(i)                                ..  sum((h),y(i,h)) =l= g(i);
+R2(i)                                ..  sum((h),y(i,h)) =g= sum((j),p(i,j)*d(j));
+R3(i,h)                              ..  sum((j),z(i,h,j)) =l= y(i,h);
+R4(h,i)                              ..  sum((j),z(i,h,j)) =l= 1;
+R5(i,j)                              ..  p(i,j)*d(j) =e= sum((h),z(i,h,j));
+R6(j,h)                              ..  sum((i),z(i,h,j)) =l= u(j);
 
 
 
@@ -91,13 +71,10 @@ R7(j,h)                              ..  sum((i),w(i,h,j)) =e= u(j,h);
 
 Model model1 /all/ ;
 option mip=CPLEX
-Solve model1 using mip minimizing z;
+Solve model1 using mip minimizing f;
 
 Display p;
 Display g;
-*Display x.l;
 Display y.l;
-Display u.l;
-Display w.l;
-*Display v.l;
 Display z.l;
+Display f.l;

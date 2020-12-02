@@ -1,0 +1,120 @@
+--- Job escenario1.gms Start 12/01/20 19:34:51 32.1.0 r75a5b5d WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\GAMS\32\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input C:\Users\Hal\Documents\universidad-de-los-andes\202020\mos\isis-3302-ProyectoFinal\escenario1.gms
+    PageSize 0
+    ScrDir C:\Users\Hal\Documents\universidad-de-los-andes\202020\mos\isis-3302-ProyectoFinal\225a\
+    SysDir C:\GAMS\32\
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.1.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: GAMS Demo license for Gabriel Cubillos         G200814|0002CO-GEN
+          Universidad de los Andes, Colombia                       DL014908
+          C:\Users\Hal\Documents\GAMS\gamslice.txt
+          g.cubillosb@uniandes.edu.co, Gabriel Cubillos                    
+          Demo license for demonstration and instructional purposes only
+--- Starting compilation
+--- escenario1.gms(80) 3 Mb
+--- Starting execution: elapsed 0:00:00.008
+--- escenario1.gms(73) 4 Mb
+--- Generating MIP model model1
+--- escenario1.gms(74) 4 Mb
+---   281 rows  526 columns  2,101 non-zeroes
+---   525 discrete-columns
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:00.016
+
+IBM ILOG CPLEX   32.1.0 r75a5b5d Released Jul 31, 2020 WEI x86 64bit/MS Window
+*** This solver runs with a demo license. No commercial use.
+Cplex 12.10.0.0
+
+Reading data...
+Starting Cplex...
+Space for names approximately 0.01 Mb
+Use option 'names no' to turn use of names off
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de2ae
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_WorkDir                                 "C:\Users\Hal\Documents\universidad-de-los-andes\202020\mos\isis-3302-ProyectoFinal\225a\"
+Tried aggregator 1 time.
+MIP Presolve eliminated 176 rows and 301 columns.
+Reduced MIP has 105 rows, 225 columns, and 510 nonzeros.
+Reduced MIP has 225 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.75 ticks)
+Found incumbent of value 75.000000 after 0.00 sec. (0.88 ticks)
+Probing time = 0.00 sec. (0.18 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 17 rows and 30 columns.
+Reduced MIP has 88 rows, 195 columns, and 450 nonzeros.
+Reduced MIP has 195 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.32 ticks)
+Probing time = 0.00 sec. (0.16 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 88 rows, 195 columns, and 450 nonzeros.
+Reduced MIP has 195 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.65 ticks)
+Probing time = 0.00 sec. (0.16 ticks)
+Clique table members: 69.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.06 ticks)
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             4.000000
+Root relaxation solution time = 0.00 sec. (0.13 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           10.0000        1.0000            90.00%
+Found incumbent of value 10.000000 after 0.00 sec. (4.09 ticks)
+      0     0        cutoff             10.0000                      6    0.00%
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (4.12 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (4.12 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.00sec (det. 4.12 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de2ae
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_WorkDir                                 "C:\Users\Hal\Documents\universidad-de-los-andes\202020\mos\isis-3302-ProyectoFinal\225a\"
+Tried aggregator 1 time.
+LP Presolve eliminated 281 rows and 526 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.21 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.33 ticks)
+
+Proven optimal solution.
+
+MIP Solution:           10.000000    (6 iterations, 0 nodes)
+Final Solve:            10.000000    (0 iterations)
+
+Best possible:          10.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+--- Reading solution for model model1
+--- Executing after solve: elapsed 0:00:00.068
+--- escenario1.gms(80) 4 Mb
+*** Status: Normal completion
+--- Job escenario1.gms Stop 12/01/20 19:34:51 elapsed 0:00:00.068

@@ -1,0 +1,31 @@
+B 3 C o m p i l a t i o n
+B 91 Equation Listing    SOLVE model1 Using MIP From line 74
+D 94 funcionObjetivo
+D 99 R1
+D 110 R2
+D 121 R3
+D 132 R4
+D 143 R5
+D 154 R6
+B 166 Column Listing      SOLVE model1 Using MIP From line 74
+E 169 y
+E 194 z
+E 219 f
+B 227 Model Statistics    SOLVE model1 Using MIP From line 74
+B 240 Solution Report     SOLVE model1 Using MIP From line 74
+F 279 funcionObjetivo
+F 283 R1
+F 293 R2
+F 303 R3
+F 383 R4
+F 463 R5
+F 498 R6
+G 593 y
+G 673 z
+G 1130 f
+B 1140 E x e c u t i o n
+I 1140 p
+I 1152 g
+I 1157 y
+I 1168 z
+I 1185 f
