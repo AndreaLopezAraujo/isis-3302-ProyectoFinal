@@ -1,5 +1,5 @@
 * Proyecto final escenario 2
-* Andrea Carolina López-201531591 y Gabriel Cubillos Bolivar-201729365
+* Andrea Carolina L�pez-201531591 y Gabriel Cubillos Bolivar-201729365
 
 sets
 i conjunto de pacientes /m1*m5/
@@ -29,12 +29,12 @@ g('m3')=36;
 g('m4')=55;
 g('m5')=120;
 
-* Duración
-parameter d(j) duración;
+* Duraci�n
+parameter d(j) duraci�n;
 d(j) = 2;
 
-* Cantidad máxima de procedimientos en simultáneo
-parameter u(j) núm máximo de procedimientos j en J que se pueden realizar de manera simultánea en el hospital.;
+* Cantidad m�xima de procedimientos en simult�neo
+parameter u(j) n�m m�ximo de procedimientos j en J que se pueden realizar de manera simult�nea en el hospital.;
 u(j)=2; 
 
 Variables
@@ -47,12 +47,12 @@ Binary variable z;
 
 Equations
 funcionObjetivo     Funcion objetivo.
-R1(i)               El paciente i∈I no puede estar en el hospital más horas de lo que su gravedad lo permita.
-R2(i)               El paciente i∈I debe estar por lo menos el tiempo que el procedimiento j∈J que requiere necesita.
-R3(i,h)             El paciente i∈I no le pueden realizar un procedimiento j∈J a la hora h∈H si no se encuentra en el hospital.
-R4(h,i)             El paciente i∈I no puede encontrarse realizando más de un procedimiento j∈J a la misma hora h∈H.
-R5(i,j)             Cada paciente i∈I debe durar en el procedimiento j∈J la duración correspondiente al procedimiento.
-R6(j,h)             Indica el número límite de veces que el procedimiento j∈J se puede realizar de manera simultánea en el hospital.
+R1(i)               El paciente i?I no puede estar en el hospital m�s horas de lo que su gravedad lo permita.
+R2(i)               El paciente i?I debe estar por lo menos el tiempo que el procedimiento j?J que requiere necesita.
+R3(i,h)             El paciente i?I no le pueden realizar un procedimiento j?J a la hora h?H si no se encuentra en el hospital.
+R4(h,i)             El paciente i?I no puede encontrarse realizando m�s de un procedimiento j?J a la misma hora h?H.
+R5(i,j)             Cada paciente i?I debe durar en el procedimiento j?J la duraci�n correspondiente al procedimiento.
+R6(j,h)             Solo se puede hacer un  procedimiento j?J a la hora h?H.
 ;
 
 

@@ -1,5 +1,5 @@
 * Proyecto final escenario 1
-*
+* Andrea Carolina López-201531591 y Gabriel Cubillos Bolivar-201729365
 
 sets
 i conjunto de pacientes /m1*m5/
@@ -52,7 +52,7 @@ R2(i)               El paciente i∈I debe estar por lo menos el tiempo que el p
 R3(i,h)             El paciente i∈I no le pueden realizar un procedimiento j∈J a la hora h∈H si no se encuentra en el hospital.
 R4(h,i)             El paciente i∈I no puede encontrarse realizando más de un procedimiento j∈J a la misma hora h∈H.
 R5(i,j)             Cada paciente i∈I debe durar en el procedimiento j∈J la duración correspondiente al procedimiento.
-R6(j,h)             Solo se puede hacer un procedimiento j∈J a la hora h∈H.
+R6(j,h)             Indica el número límite de veces que el procedimiento j∈J se puede realizar de manera simultánea en el hospital.
 ;
 
 
