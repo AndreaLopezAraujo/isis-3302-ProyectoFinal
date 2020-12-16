@@ -1,0 +1,21 @@
+--- Job escenario1.gms Start 12/15/20 23:18:25 32.1.0 r75a5b5d WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    D:\AAAOPERATIVA\GAMS\32\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "D:\Mis documentos\ANDREA\isis-3302-ProyectoFinal\escenario1.gms"
+    PageSize 0
+    ScrDir "D:\Mis documentos\ANDREA\isis-3302-ProyectoFinal\225a\"
+    SysDir D:\AAAOPERATIVA\GAMS\32\
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.1.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+****
+**** No license specified and no gamslice.txt found in standard locations.
+****
+*** Status: Terminated due to a licensing error
+***         Request a demo license at www.gams.com/download
+***         Inspect listing file for more information
+--- Job escenario1.gms Stop 12/15/20 23:18:25 elapsed 0:00:00.003
